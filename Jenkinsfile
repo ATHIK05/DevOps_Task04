@@ -2,7 +2,7 @@ pipeline {
     agent any
 
     environment {
-        KUBECONFIG = "/path/to/kubeconfig"  // Path to your kubeconfig file
+        KUBECONFIG = "/home/jenkins/.kube/config"  // Path to your kubeconfig file
     }
 
     stages {

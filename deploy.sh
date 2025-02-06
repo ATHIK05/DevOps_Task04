@@ -3,10 +3,11 @@
 # Exit on error
 set -e
 
-# Set the correct kubeconfig if needed
+# Set the correct kubeconfig if needed (Adjust path as necessary)
 export KUBECONFIG=$HOME/.kube/config  # Update path if required
 
 # Ensure Minikube context is selected
+echo "🔄 Switching to Minikube context..."
 kubectl config use-context minikube
 
 # Docker build process
@@ -21,11 +22,17 @@ echo "qwerty786!A" | docker login -u "mohamedathikr" --password-stdin
 echo "🚀 Pushing the Docker image to Docker Hub..."
 docker push mohamedathikr/devopstask04
 
-kubevtl apply -f deployment.yaml
+# Deploy to Minikube using a YAML file without validation
+echo "📦 Deploying to Minikube..."
+kubectl apply -f deployment.yaml --validate=false
+kubectl apply -f service.yaml --validate=false
+
+# Expose the deployment using a YAML file (if needed)
 echo "🌍 Exposing the deployment..."
 kubectl apply -f service.yaml
 
-# Get the service URL
+# Get the service URL from Minikube
 echo "🔗 Fetching the service URL..."
+minikube service newdevops --url
 
 echo "✅ Deployment completed successfully!"

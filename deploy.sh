@@ -21,17 +21,12 @@ echo "qwerty786!A" | docker login -u "mohamedathikr" --password-stdin
 echo "🚀 Pushing the Docker image to Docker Hub..."
 docker push mohamedathikr/devopstask04
 
-# Deploy to Minikube using a YAML file without validation
-echo "📦 Deploying to Minikube..."
-kubectl apply -f deployment.yaml --validate=false
-kubectl apply -f service.yaml --validate=false
-
-# Expose the deployment using a YAML file
+kubevtl apply -f deployment.yaml
 echo "🌍 Exposing the deployment..."
 kubectl apply -f service.yaml
 
 # Get the service URL
 echo "🔗 Fetching the service URL..."
-minikube service newdevops --url
+minikube service newdevops 
 
 echo "✅ Deployment completed successfully!"

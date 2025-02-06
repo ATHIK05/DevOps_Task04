@@ -27,6 +27,5 @@ kubectl apply -f service.yaml
 
 # Get the service URL
 echo "🔗 Fetching the service URL..."
-minikube service newdevops 
 
 echo "✅ Deployment completed successfully!"

@@ -2,7 +2,7 @@ pipeline {
     agent any
 
     environment {
-        KUBECONFIG = "/root/.kube/config"  // Path to your kubeconfig file
+        KUBECONFIG = "/path/to/kubeconfig"  // Path to your kubeconfig file
     }
 
     stages {

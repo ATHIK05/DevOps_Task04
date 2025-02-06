@@ -31,8 +31,6 @@ kubectl apply -f service.yaml --validate=false
 echo "🌍 Exposing the deployment..."
 kubectl apply -f service.yaml
 
-# Get the service URL from Minikube
-echo "🔗 Fetching the service URL..."
-minikube service newdevops --url
+
 
 echo "✅ Deployment completed successfully!"

@@ -1,18 +1,24 @@
 pipeline {
     agent any
 
+    environment {
+        KUBECONFIG = "/root/.kube/config"  // Path to your kubeconfig file
+    }
+
     stages {
-        stage('Build and Push Docker Image') {
+        stage('Deploy to Minikube') {
             steps {
-                // Grant executable permissions to the build script
-                sh 'chmod +x deploy.sh'
-
-                // Build the Docker image using the build script
-                sh './deploy.sh'
-
-                
+                script {
+                    sh '''
+                    # Make sure the correct context is selected for Minikube
+                    kubectl config use-context minikube
+                    
+                    # Now apply your deployment and service files
+                    kubectl apply -f deployment.yaml --validate=false
+                    kubectl apply -f service.yaml --validate=false
+                    '''
+                }
             }
         }
-
     }
 }

@@ -1,19 +1,19 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: newdevops
+  name: devopstask04
 spec:
-  replicas: 1
+  replicas: 2
   selector:
     matchLabels:
-      app: newdevops
+      app: devopstask04
   template:
     metadata:
       labels:
-        app: newdevops
+        app: devopstask04
     spec:
       containers:
-      - name: newdevops
-        image: mohamedathikr/devopstask04
-        ports:
-        - containerPort: 80
+        - name: devopstask04
+          image: mohamedathikr/devopstask04:latest
+          ports:
+            - containerPort: 80

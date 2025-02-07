@@ -11,7 +11,8 @@ pipeline {
             steps {
                 script {
                     sh '''
-                    set -e  
+                    set -e  # Exit on error
+
                     echo "🔄 Switching to Minikube context..."
                     kubectl config use-context minikube
                     echo "✅ Minikube context set successfully!"
@@ -24,10 +25,10 @@ pipeline {
             steps {
                 script {
                     sh '''
+                    set -e  # Exit on error
+
                     echo "🚀 Deploying Application..."
                     kubectl apply -f deployment.yaml --validate=false
-                    kubectl apply -f service.yaml --validate=false
-                    echo "✅ Deployment Completed!"
                     '''
                 }
             }

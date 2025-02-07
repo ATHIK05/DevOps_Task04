@@ -1,13 +1,23 @@
 pipeline {
     agent any
+
+    environment {
+        KUBECONFIG = "/var/lib/jenkins/.kube/config"  // Ensure correct path
+        MINIKUBE_HOME = "/var/lib/jenkins/.minikube"  // Set Minikube home for Jenkins
+    }
+
     stages {
-        stage('Deploy to Minikube') {
+        stage('Setup Minikube Context') {
             steps {
                 script {
-                    withEnv(["KUBECONFIG=/var/lib/jenkins/.kube/config"]) {
-                        sh 'kubectl config use-context minikube'
-                        sh 'kubectl get nodes'
-                    }
+                    sh '''
+                    set -e  # Exit on error
+                    
+                    echo "🔄 Switching to Minikube context..."
+                    kubectl config use-context minikube
+
+                    echo "✅ Minikube context set successfully!"
+                    '''
                 }
             }
         }
